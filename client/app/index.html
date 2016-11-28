@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>ES6 MVC</title>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="assets/libs/materialize/dist/css/materialize.min.css"  media="screen, projection"/>
+    <link rel="stylesheet" href="assets/css/index.css" media="screen, projection"/>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo">ES6 MVC</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+
+        <h5 class="center-align">Negociacoes</h5>
+
+        <div class="row">
+
+            <form class="col s12" id="form">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input id="data" type="date" class="datepicker" required>
+                        <label for="data">Data</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">phone</i>
+                        <input id="quantidade" type="number" class="" min="1" step="1" value="1" required>
+                        <label for="quantidade">Quantidade</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">phone</i>
+                        <input id="valor" type="number" class="" min="0.1" step="0.1" value="1.0" required>
+                        <label for="valor">Valor</label>
+                    </div>
+                </div>
+
+                <button class="btn waves-effect waves-light" type="submit" name="action">Incluir
+                    <i class="material-icons right">send</i>
+                </button>
+            </form>
+
+        </div>
+
+        <table id="tabela" class="highlight responsive-table">
+            <thead>
+                <tr>
+                    <th data-field="data">Data</th>
+                    <th data-field="quantidade">Quantidade</th>
+                    <th data-field="valor">Valor</th>
+                    <th data-field="volume">Volume</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+
+    </main>
+
+    <footer class="page-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Footer Content</h5>
+                    <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Links</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2014 Copyright Text
+                <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            </div>
+        </div>
+    </footer>
+
+    <!--Import jQuery before materialize.js-->
+    <script src="assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="assets/libs/materialize/dist/js/materialize.min.js"></script>
+    <script src="init.js"></script>
+    <!--<script src="index.js"></script>-->
+    <script src="javascript/models/Negociacao.js"></script>
+    <script>
+        let hoje = new Date();
+
+        // passo o objeto hoje como referencia para a minha classe
+        let n1 = new Negociacao(hoje, 5, 700);
+        // logo posso altera-la | para evitar, usar programacao defensiva, new date na classe
+        hoje.setDate(16);
+        n1.quantidade = 1000;
+        n1._quantidade = 5000;
+
+        console.log(n1.data);
+        console.log(n1.quantidade);
+        console.log(n1.valor);
+        console.log(n1.volume);
+
+    </script>
+</body>
+</html>

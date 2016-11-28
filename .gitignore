@@ -105,3 +105,4 @@ jspm_packages
 
 # customizado
 client/app/assets/libs
+server
