@@ -27,7 +27,7 @@
 
         <div class="row">
 
-            <form class="col s12" id="form">
+            <form class="col s12" id="form" onsubmit="negociacaoController.adiciona(event)">
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="material-icons prefix">account_circle</i>
@@ -101,20 +101,25 @@
     <script src="init.js"></script>
     <!--<script src="index.js"></script>-->
     <script src="javascript/models/Negociacao.js"></script>
+    <script src="javascript/controllers/NegociacaoController.js"></script>
+    <script src="javascript/helpers/DateHelper.js"></script>
     <script>
-        let hoje = new Date();
+
+        let negociacaoController = new NegociacaoController();
+
+//        let hoje = new Date();
 
         // passo o objeto hoje como referencia para a minha classe
-        let n1 = new Negociacao(hoje, 5, 700);
+//        let n1 = new Negociacao(hoje, 5, 700);
         // logo posso altera-la | para evitar, usar programacao defensiva, new date na classe
-        hoje.setDate(16);
-        n1.quantidade = 1000;
-        n1._quantidade = 5000;
-
-        console.log(n1.data);
-        console.log(n1.quantidade);
-        console.log(n1.valor);
-        console.log(n1.volume);
+//        hoje.setDate(16);
+//        n1.quantidade = 1000;
+//        n1._quantidade = 5000;
+//
+//        console.log(n1.data);
+//        console.log(n1.quantidade);
+//        console.log(n1.valor);
+//        console.log(n1.volume);
 
     </script>
 </body>

@@ -1,3 +1,6 @@
+// Import e Exports ainda nao suportados nos navegadores - 18/12/2016
+// export class Negociacao..
+
 class Negociacao {
 
     constructor(data, quantidade, valor) {
