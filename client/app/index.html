@@ -27,6 +27,8 @@
 
         <div class="row">
 
+            <div id="mensagemView"></div>
+
             <form class="col s12" id="form" onsubmit="negociacaoController.adiciona(event)">
                 <div class="row">
                     <div class="input-field col s12">
@@ -53,19 +55,7 @@
 
         </div>
 
-        <table id="tabela" class="highlight responsive-table">
-            <thead>
-                <tr>
-                    <th data-field="data">Data</th>
-                    <th data-field="quantidade">Quantidade</th>
-                    <th data-field="valor">Valor</th>
-                    <th data-field="volume">Volume</th>
-                </tr>
-            </thead>
-            <tbody>
-
-            </tbody>
-        </table>
+        <div id="negociacoesView"></div>
 
     </main>
 
@@ -101,9 +91,14 @@
     <script src="init.js"></script>
     <!--<script src="index.js"></script>-->
     <script src="javascript/models/Negociacao.js"></script>
-    <script src="javascript/models/ListaNegociacoes.js"></script>
     <script src="javascript/controllers/NegociacaoController.js"></script>
     <script src="javascript/helpers/DateHelper.js"></script>
+    <script src="javascript/models/ListaNegociacoes.js"></script>
+    <script src="javascript/views/View.js"></script>
+    <script src="javascript/views/NegociacoesView.js"></script>
+    <script src="javascript/models/Mensagem.js"></script>
+    <script src="javascript/views/MensagemView.js"></script>
+
     <script>
 
         let negociacaoController = new NegociacaoController();
