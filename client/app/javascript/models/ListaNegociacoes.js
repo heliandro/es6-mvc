@@ -8,6 +8,7 @@ class ListaNegociacoes {
     adiciona(negociacao) {
 
         this._negociacoes.push(negociacao);
+        // this._negociacoes = [].concat(this._negociacoes, negociacao);
     }
 
     get negociacoes() {
@@ -15,5 +16,15 @@ class ListaNegociacoes {
         return [].concat(this._negociacoes);
     }
 
+    esvazia() {
+        this._negociacoes = [];
+    }
 
+    ordena(criterio) {
+        this._negociacoes.sort(criterio);
+    }
+
+    inverteOrdem() {
+        this._negociacoes.reverse();
+    }
 }

@@ -8,36 +8,80 @@ class NegociacaoController {
 
         // $ recebe o querySelector que ainda possui o contexto do document gracas ao bind
         let poison = document.querySelector.bind(document);
+
         this._inputData = poison("#data");
         this._inputQuantidade = poison("#quantidade");
         this._inputValor = poison("#valor");
-        this._listaNegociacoes = new ListaNegociacoes();
+        this._ordemAtual = '';
 
-        this._negociacoesView = new NegociacoesView(poison('#negociacoesView'));
-        this._negociacoesView.update(this._listaNegociacoes);
+        // data binding
+        this._listaNegociacoes = new Bind(
+            new ListaNegociacoes(),
+            new NegociacoesView(poison('#negociacoesView')),
+            'adiciona', 'esvazia', 'ordena', 'inverteOrdem'
+        );
 
-        this._mensagem = new Mensagem();
-        this._mensagemView = new MensagemView(poison('#mensagemView'));
-        this._mensagemView.update(this._mensagem);
+        this._mensagem = new Bind(
+            new Mensagem(),
+            new MensagemView(poison('#mensagemView')),
+            'texto'
+        );
+
     }
 
     adiciona(event) {
 
         event.preventDefault();
 
-        this._listaNegociacoes.adiciona(this._criaNegociacao());
+        try {
+            this._listaNegociacoes.adiciona(this._criaNegociacao());
+            this._mensagem.texto = 'Negociacao adicionada com sucesso!';
+            this._limpaFormulario();
+        } catch(erro) {
+            this._mensagem.texto = erro;
+        }
+    }
 
-        // BEGIN | Se os codigos abaixo alterarem o array listaNegociacoes da classe ListaNegociacoes e pq ela nao esta blindada.
-            this._listaNegociacoes.negociacoes.push(this._criaNegociacao());
-            this._listaNegociacoes.negociacoes.length = 0;
-        // END
+    importaNegociacoes() {
 
-        this._negociacoesView.update(this._listaNegociacoes);
+        let service = new NegociacaoService();
 
-        this._mensagem.texto = 'Negociacao adicionada com sucesso!';
-        this._mensagemView.update(this._mensagem);
+        service
+            .obterNegociacoes()
+            .then(negociacoes => negociacoes.forEach(negociacao => {
+                this._listaNegociacoes.adiciona(negociacao);
+                this._mensagem.texto = 'Negociacoes do periodo importadas'
+            }))
+            .catch(erro => this._mensagem.texto = erro);
 
-        this._limpaFormulario();
+        // Promise.all([
+        //     service.obterNegociacoesDaSemana(),
+        //     service.obterNegociacoesDaSemanaAnterior(),
+        //     service.obterNegociacoesDaSemanaRetrasada()]
+        // ).then(negociacoes => {
+        //     console.log(negociacoes);
+        //     negociacoes
+        //         .reduce((arrayAchatado, array) => arrayAchatado.concat(array), [])
+        //         .forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
+        //     this._mensagem.texto = 'Negociacoes importadas com sucesso';
+        // })
+        // .catch(erro => this._mensagem.texto = erro);
+    }
+
+    ordena(coluna) {
+
+        if(this._ordemAtual == coluna)
+            this._listaNegociacoes.inverteOrdem();
+        else
+            this._listaNegociacoes.ordena((a, b) => a[coluna] - b[coluna]);
+
+        this._ordemAtual = coluna;
+    }
+
+    apaga() {
+
+        this._listaNegociacoes.esvazia();
+        this._mensagem.texto = 'Negociacoes apagadas com sucesso!';
     }
 
     _criaNegociacao() {

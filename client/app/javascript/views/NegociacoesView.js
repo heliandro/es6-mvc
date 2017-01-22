@@ -10,10 +10,10 @@ class NegociacoesView extends View {
             <table id="tabela" class="highlight responsive-table">
                 <thead>
                     <tr>
-                        <th data-field="data">Data</th>
-                        <th data-field="quantidade">Quantidade</th>
-                        <th data-field="valor">Valor</th>
-                        <th data-field="volume">Volume</th>
+                        <th onclick="negociacaoController.ordena('data')">Data</th>
+                        <th onclick="negociacaoController.ordena('quantidade')">Quantidade</th>
+                        <th onclick="negociacaoController.ordena('valor')">Valor</th>
+                        <th onclick="negociacaoController.ordena('volume')">Volume</th>
                     </tr>
                 </thead>
                 <tbody>
